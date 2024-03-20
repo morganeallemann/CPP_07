@@ -36,11 +36,13 @@ class   Array{
 		/* COPY CONSTRUCTOR */
 		Array(Array const &cpy){
 			std::cout << "Copy constructor was called " << std::endl;
-			this->_array = nullptr;
-			*this = cpy;
+			this->_nb = cpy._nb;
+			this->_array = new T[_nb];
+			for (unsigned int i = 0; i <= _nb; i++)
+				this->_array[i] = cpy._array[i];
 		}
 		/* DESUTRCTOR */
-		~Array(){
+		 ~Array(){
 			std::cout << "Destructor was called " << std::endl;
 			if (this->_array != nullptr)
 				delete [] this->_array;
@@ -55,7 +57,7 @@ class   Array{
 			}
 			return (*this);
 		}
-		T	&operator[](unsigned int nb){
+		T	&operator[](unsigned int nb) const{
 			if (nb >= 0 && nb <= this->_nb)
 				return (this->_array[nb]);
 			else
